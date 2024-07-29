@@ -105,5 +105,5 @@ void lcd_display_on(void);
 void lcd_display_off(void);
 
 void lcd_fill_array(rt_uint16_t x_start, rt_uint16_t y_start, rt_uint16_t x_end, rt_uint16_t y_end, void *pcolor);
-uint16_t LCD_BGR2RGB(uint16_t c);
+
 #endif

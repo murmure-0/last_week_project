@@ -66,7 +66,6 @@
 #define RT_USING_USER_MAIN
 #define RT_MAIN_THREAD_STACK_SIZE 2048
 #define RT_MAIN_THREAD_PRIORITY 10
-#define RT_USING_LEGACY
 #define RT_USING_MSH
 #define RT_USING_FINSH
 #define FINSH_USING_MSH
@@ -84,46 +83,12 @@
 
 /* DFS: device virtual file system */
 
-#define RT_USING_DFS
-#define DFS_USING_POSIX
-#define DFS_USING_WORKDIR
-#define DFS_FD_MAX 16
-#define RT_USING_DFS_V1
-#define DFS_FILESYSTEMS_MAX 4
-#define DFS_FILESYSTEM_TYPES_MAX 4
-#define RT_USING_DFS_ELMFAT
-
-/* elm-chan's FatFs, Generic FAT Filesystem Module */
-
-#define RT_DFS_ELM_CODE_PAGE 437
-#define RT_DFS_ELM_WORD_ACCESS
-#define RT_DFS_ELM_USE_LFN_3
-#define RT_DFS_ELM_USE_LFN 3
-#define RT_DFS_ELM_LFN_UNICODE_0
-#define RT_DFS_ELM_LFN_UNICODE 0
-#define RT_DFS_ELM_MAX_LFN 255
-#define RT_DFS_ELM_DRIVES 2
-#define RT_DFS_ELM_MAX_SECTOR_SIZE 4096
-#define RT_DFS_ELM_REENTRANT
-#define RT_DFS_ELM_MUTEX_TIMEOUT 3000
-/* end of elm-chan's FatFs, Generic FAT Filesystem Module */
-#define RT_USING_DFS_DEVFS
-#define RT_USING_DFS_ROMFS
 /* end of DFS: device virtual file system */
-#define RT_USING_FAL
-#define FAL_DEBUG_CONFIG
-#define FAL_DEBUG 1
-#define FAL_PART_HAS_TABLE_CFG
-#define FAL_USING_SFUD_PORT
-#define FAL_USING_NOR_FLASH_DEV_NAME "norflash0"
 
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
 #define RT_UNAMED_PIPE_NUMBER 64
-#define RT_USING_SYSTEM_WORKQUEUE
-#define RT_SYSTEM_WORKQUEUE_STACKSIZE 2048
-#define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
 #define RT_USING_SERIAL_V1
 #define RT_SERIAL_USING_DMA
@@ -131,37 +96,6 @@
 #define RT_USING_I2C
 #define RT_USING_I2C_BITOPS
 #define RT_USING_PWM
-#define RT_USING_SPI
-#define RT_USING_SFUD
-#define RT_SFUD_USING_SFDP
-#define RT_SFUD_USING_FLASH_INFO_TABLE
-#define RT_SFUD_SPI_MAX_HZ 50000000
-#define RT_USING_WIFI
-#define RT_WLAN_DEVICE_STA_NAME "wlan0"
-#define RT_WLAN_DEVICE_AP_NAME "wlan1"
-#define RT_WLAN_SSID_MAX_LENGTH 32
-#define RT_WLAN_PASSWORD_MAX_LENGTH 32
-#define RT_WLAN_DEV_EVENT_NUM 2
-#define RT_WLAN_MANAGE_ENABLE
-#define RT_WLAN_SCAN_WAIT_MS 10000
-#define RT_WLAN_CONNECT_WAIT_MS 10000
-#define RT_WLAN_SCAN_SORT
-#define RT_WLAN_MSH_CMD_ENABLE
-#define RT_WLAN_JOIN_SCAN_BY_MGNT
-#define RT_WLAN_AUTO_CONNECT_ENABLE
-#define AUTO_CONNECTION_PERIOD_MS 2000
-#define RT_WLAN_CFG_ENABLE
-#define RT_WLAN_CFG_INFO_MAX 3
-#define RT_WLAN_PROT_ENABLE
-#define RT_WLAN_PROT_NAME_LEN 8
-#define RT_WLAN_PROT_MAX 2
-#define RT_WLAN_DEFAULT_PROT "lwip"
-#define RT_WLAN_PROT_LWIP_ENABLE
-#define RT_WLAN_PROT_LWIP_NAME "lwip"
-#define RT_WLAN_WORK_THREAD_ENABLE
-#define RT_WLAN_WORKQUEUE_THREAD_NAME "wlan"
-#define RT_WLAN_WORKQUEUE_THREAD_SIZE 2048
-#define RT_WLAN_WORKQUEUE_THREAD_PRIO 15
 #define RT_USING_PIN
 /* end of Device Drivers */
 
@@ -180,10 +114,6 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
-#define RT_USING_POSIX_FS
-#define RT_USING_POSIX_POLL
-#define RT_USING_POSIX_SELECT
-#define RT_USING_POSIX_SOCKET
 
 /* Interprocess Communication (IPC) */
 
@@ -196,65 +126,6 @@
 
 /* Network */
 
-#define RT_USING_SAL
-#define SAL_INTERNET_CHECK
-
-/* Docking with protocol stacks */
-
-#define SAL_USING_LWIP
-/* end of Docking with protocol stacks */
-#define SAL_USING_POSIX
-#define RT_USING_NETDEV
-#define NETDEV_USING_IFCONFIG
-#define NETDEV_USING_PING
-#define NETDEV_USING_NETSTAT
-#define NETDEV_USING_AUTO_DEFAULT
-#define NETDEV_IPV4 1
-#define NETDEV_IPV6 0
-#define RT_USING_LWIP
-#define RT_USING_LWIP203
-#define RT_USING_LWIP_VER_NUM 0x20003
-#define RT_LWIP_MEM_ALIGNMENT 4
-#define RT_LWIP_IGMP
-#define RT_LWIP_ICMP
-#define RT_LWIP_DNS
-#define RT_LWIP_DHCP
-#define IP_SOF_BROADCAST 1
-#define IP_SOF_BROADCAST_RECV 1
-
-/* Static IPv4 Address */
-
-#define RT_LWIP_IPADDR "192.168.1.30"
-#define RT_LWIP_GWADDR "192.168.1.1"
-#define RT_LWIP_MSKADDR "255.255.255.0"
-/* end of Static IPv4 Address */
-#define RT_LWIP_UDP
-#define RT_LWIP_TCP
-#define RT_LWIP_RAW
-#define RT_MEMP_NUM_NETCONN 8
-#define RT_LWIP_PBUF_NUM 16
-#define RT_LWIP_RAW_PCB_NUM 4
-#define RT_LWIP_UDP_PCB_NUM 4
-#define RT_LWIP_TCP_PCB_NUM 4
-#define RT_LWIP_TCP_SEG_NUM 40
-#define RT_LWIP_TCP_SND_BUF 8196
-#define RT_LWIP_TCP_WND 8196
-#define RT_LWIP_TCPTHREAD_PRIORITY 10
-#define RT_LWIP_TCPTHREAD_MBOX_SIZE 8
-#define RT_LWIP_TCPTHREAD_STACKSIZE 1024
-#define RT_LWIP_ETHTHREAD_PRIORITY 12
-#define RT_LWIP_ETHTHREAD_STACKSIZE 1024
-#define RT_LWIP_ETHTHREAD_MBOX_SIZE 8
-#define LWIP_NETIF_STATUS_CALLBACK 1
-#define LWIP_NETIF_LINK_CALLBACK 1
-#define RT_LWIP_NETIF_NAMESIZE 6
-#define SO_REUSE 1
-#define LWIP_SO_RCVTIMEO 1
-#define LWIP_SO_SNDTIMEO 1
-#define LWIP_SO_RCVBUF 1
-#define LWIP_SO_LINGER 0
-#define LWIP_NETIF_LOOPBACK 0
-#define RT_LWIP_USING_PING
 /* end of Network */
 
 /* Memory protection */
@@ -284,16 +155,6 @@
 /* Wiced WiFi */
 
 /* end of Wiced WiFi */
-#define PKG_USING_RW007
-#define PKG_USING_RW007_V210
-#define RW007_USING_STM32_DRIVERS
-#define RW007_SPI_MAX_HZ 30000000
-#define RW007_SPI_BUS_NAME "spi2"
-#define RW007_CS_PIN 90
-#define RW007_BOOT0_PIN 29
-#define RW007_BOOT1_PIN 90
-#define RW007_INT_BUSY_PIN 107
-#define RW007_RST_PIN 111
 
 /* CYW43012 WiFi */
 
@@ -310,54 +171,6 @@
 
 /* IoT Cloud */
 
-#define PKG_USING_ALI_IOTKIT
-#define PKG_USING_ALI_IOTKIT_PRODUCT_KEY "k1m0z9WEcKn"
-#define PKG_USING_ALI_IOTKIT_PRODUCT_SECRET "spW0dDGDhHHJhZSR"
-#define PKG_USING_ALI_IOTKIT_DEVICE_NAME "Temp_Hum"
-#define PKG_USING_ALI_IOTKIT_DEVICE_SECRET "cd294e5c6d3f9a47e506ef7db25396fb"
-#define PKG_ALI_IOTKIT_SELECT_ITEM
-#define PLATFORM_HAS_STDINT
-#define PLATFORM_HAS_DYNMEM
-#define PLATFORM_HAS_OS
-#define INFRA_STRING
-#define INFRA_NET
-#define INFRA_LIST
-#define INFRA_LOG_NETWORK_PAYLOAD
-#define INFRA_LOG
-
-/* Log Configurations */
-
-#define INFRA_LOG_MUTE_FLW
-#define INFRA_LOG_MUTE_DBG
-#define INFRA_LOG_MUTE_INF
-#define INFRA_LOG_MUTE_WRN
-#define INFRA_LOG_MUTE_CRT
-/* end of Log Configurations */
-#define INFRA_TIMER
-#define INFRA_CJSON
-#define INFRA_SHA256
-#define INFRA_REPORT
-#define INFRA_COMPAT
-#define INFRA_CLASSIC
-#define DEV_SIGN
-#define MQTT_COMM_ENABLED
-
-/* MQTT Configurations */
-
-#define MQTT_DEFAULT_IMPL
-#define MQTT_DIRECT
-/* end of MQTT Configurations */
-#define DEVICE_MODEL_CLASSIC
-#define LOG_REPORT_TO_CLOUD
-#define DEVICE_MODEL_ENABLED
-
-/* Device Model Configurations */
-
-/* end of Device Model Configurations */
-#define PKG_USING_ALI_IOTKIT_SAMPLES
-#define PKG_USING_ALI_IOTKIT_MQTT_SAMPLE
-#define PKG_USING_ALI_IOTKIT_V30002
-#define PKG_ALI_IOTKIT_VER_NUM 0x30002
 /* end of IoT Cloud */
 /* end of IoT - internet of things */
 
@@ -369,8 +182,6 @@
 
 /* JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
-#define PKG_USING_CJSON
-#define PKG_USING_CJSON_V1717
 /* end of JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
 /* XML: Extensible Markup Language */
@@ -382,6 +193,13 @@
 
 /* LVGL: powerful and easy-to-use embedded GUI library */
 
+#define PKG_USING_LVGL
+#define PKG_LVGL_THREAD_PRIO 20
+#define PKG_LVGL_THREAD_STACK_SIZE 4096
+#define PKG_LVGL_DISP_REFR_PERIOD 5
+#define PKG_LVGL_USING_DEMOS
+#define PKG_LVGL_USING_V080311
+#define PKG_LVGL_VER_NUM 0x080311
 /* end of LVGL: powerful and easy-to-use embedded GUI library */
 
 /* u8g2: a monochrome graphic library */
@@ -431,8 +249,6 @@
 
 /* sensors drivers */
 
-#define PKG_USING_AHT10
-#define PKG_USING_AHT10_LATEST_VERSION
 /* end of sensors drivers */
 
 /* touch drivers */
@@ -519,13 +335,7 @@
 #define BSP_USING_SRAM
 #define BSP_USING_ONBOARD_LCD
 #define BSP_USING_ONBOARD_LCD_PWM_BL
-#define BSP_USING_SPI_FLASH
-#define BSP_USING_FS
-#define BSP_USING_FLASH_FATFS
-#define BSP_USING_FLASH_FS_AUTO_MOUNT
-#define BSP_USING_FAL
-#define BSP_USING_RW007_WLAN
-#define BSP_USING_AHT21
+#define BSP_USING_LVGL
 /* end of Onboard Peripheral Drivers */
 
 /* On-chip Peripheral Drivers */
@@ -536,13 +346,6 @@
 #define BSP_USING_PWM
 #define BSP_USING_PWM14
 #define BSP_USING_PWM14_CH1
-#define BSP_USING_ON_CHIP_FLASH
-#define BSP_USING_SPI
-#define BSP_USING_SPI2
-#define BSP_USING_I2C
-#define BSP_USING_I2C3
-#define BSP_I2C3_SCL_PIN 64
-#define BSP_I2C3_SDA_PIN 65
 #define BSP_USING_EXT_FMC_IO
 #define BSP_USING_FMC
 /* end of On-chip Peripheral Drivers */
