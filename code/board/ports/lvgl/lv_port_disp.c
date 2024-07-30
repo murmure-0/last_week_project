@@ -51,7 +51,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_port_disp_init(void)
+void lv_port_disp_init_1(void)
 {
     /*-------------------------
      * Initialize your display
