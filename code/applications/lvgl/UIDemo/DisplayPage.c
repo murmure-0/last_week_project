@@ -150,6 +150,7 @@ void DisplayPage_Init()
     PAGE_IMPORT(MainMenu);        // 主菜单页面
     // PAGE_IMPORT(SDCard);          // SD卡管理页面
     PAGE_IMPORT(Dial);            // 拨号页面
+    PAGE_IMPORT(Main);
     // PAGE_IMPORT(SysInfo);         // 系统信息页面
     // PAGE_IMPORT(Attitude);        // 姿态显示页面
     // PAGE_IMPORT(BackLight);       // 背光设置页面

@@ -1,4 +1,14 @@
 /*
+ * @Author: murnure 2662761173@qq.com
+ * @Date: 2024-07-30 23:26:06
+ * @LastEditors: murnure 2662761173@qq.com
+ * @LastEditTime: 2024-07-31 16:05:00
+ * @FilePath: \code\applications\lvgl\lv_conf.h
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by murmure, All Rights Reserved. 
+ */
+/*
  * Copyright (c) 2006-2021, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
@@ -46,7 +56,7 @@
 #define LV_FILE_EXPLORER_PATH_MAX_LEN 128
 
 #define LV_COLOR_SCREEN_TRANSP 1
-
+// #define LV_USE_GIF 1
 /*Enables/disables support for compressed fonts.*/
 #define LV_USE_FONT_COMPRESSED 0
 

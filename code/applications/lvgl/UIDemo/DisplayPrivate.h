@@ -57,6 +57,7 @@ typedef enum
     PAGE_SDCard,
 	PAGE_SysInfo,
 	PAGE_Dial,
+    PAGE_Main,
     PAGE_Attitude,
     PAGE_BackLight,
     PAGE_HWTest,
