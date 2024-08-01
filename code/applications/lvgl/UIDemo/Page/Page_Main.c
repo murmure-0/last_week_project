@@ -1,5 +1,5 @@
 #include "../DisplayPrivate.h"
-
+// #include "lfs.h"
 // #include "aht10.h"
 PAGE_EXPORT(Main);
 
@@ -117,7 +117,7 @@ static void Time_Create(lv_obj_t* par)
     /* 设置容器的大小 */
     lv_obj_set_size(cont, 140, 80);
     /* 将容器对齐到父对象的底部中间位置 */
-    lv_obj_align_to(cont, contBatt, LV_ALIGN_LEFT_MID, 10, -20);
+    lv_obj_align_to(cont, contBatt, LV_ALIGN_LEFT_MID, 15, -20);
     /* 设置容器边框宽度 */
     lv_obj_set_style_border_width(cont, 3, LV_PART_MAIN);
     /* 清除容器的可滚动标志 */
@@ -142,10 +142,55 @@ static void Time_Create(lv_obj_t* par)
 static void LOGO_Create(lv_obj_t* par)
 {
     lv_obj_t* img = lv_img_create(par);
-    lv_img_set_src(img, &IMG_RTTHREAD);
+    lv_img_set_src(img, "E:/sdcard/IMG/IMG_RTTHREAD.bin");
     lv_obj_align_to(img, par, LV_ALIGN_BOTTOM_LEFT, 10, -15);
 }
+static const char * anim_imgs[17] = {
+    "E:/sdcard/IMG/HUTAO/1.bin",
+    "E:/sdcard/IMG/HUTAO/2.bin",
+    "E:/sdcard/IMG/HUTAO/3.bin",
+    "E:/sdcard/IMG/HUTAO/4.bin",
+    "E:/sdcard/IMG/HUTAO/5.bin",
+    "E:/sdcard/IMG/HUTAO/6.bin",
+    "E:/sdcard/IMG/HUTAO/7.bin",
+    "E:/sdcard/IMG/HUTAO/8.bin",
+    "E:/sdcard/IMG/HUTAO/9.bin",
+    "E:/sdcard/IMG/HUTAO/10.bin",
+    "E:/sdcard/IMG/HUTAO/11.bin",
+    "E:/sdcard/IMG/HUTAO/12.bin",
+    "E:/sdcard/IMG/HUTAO/13.bin",
+    "E:/sdcard/IMG/HUTAO/14.bin",
+    "E:/sdcard/IMG/HUTAO/15.bin",
+    "E:/sdcard/IMG/HUTAO/16.bin",
+    "E:/sdcard/IMG/HUTAO/17.bin",
 
+};
+static void GIF_Create(lv_obj_t* par)
+{
+    /* 创建一个容器对象 */
+    lv_obj_t* cont = lv_obj_create(par);
+
+    /* 设置容器的大小 */
+    lv_obj_set_size(cont, 80, 80);
+    /* 将容器对齐到父对象的底部中间位置 */
+    lv_obj_align_to(cont, par, LV_ALIGN_RIGHT_MID, 0, 15);
+    /* 设置容器边框宽度 */
+    /* 设置容器边框宽度 */
+    lv_obj_set_style_border_width(cont, 0, LV_PART_MAIN);
+    //移除容器的边框
+    lv_obj_clear_flag(cont, LV_OBJ_FLAG_SCROLLABLE);
+    // lv_obj_t* img = lv_img_create(par);
+    // lv_img_set_src(img, "E:/sdcard/IMG/HUTAO/1.bin");
+    // lv_obj_align_to(img, par, LV_ALIGN_RIGHT_MID, 5, 15);
+    lv_obj_t * animimg = lv_animimg_create(cont);
+    lv_obj_center(animimg);
+    // lv_obj_align_to(animimg, par, LV_ALIGN_RIGHT_MID, 5, 15);
+    lv_animimg_set_src(animimg, (lv_img_dsc_t**)anim_imgs, 17);
+    lv_animimg_set_duration(animimg, 1000);
+    lv_animimg_set_repeat_count(animimg, LV_ANIM_REPEAT_INFINITE);
+    lv_animimg_start(animimg);
+
+}
 
 
 
@@ -174,6 +219,28 @@ typedef struct lv_anim_timeline_info
 
 
 
+//测试读取函数
+void lv_fs_test(void)
+{
+    // lv_fs_dir_t dir;
+    // lv_fs_res_t res;
+    // const char *fname;
+
+    // /* Open the directory */
+    // res = lv_fs_opendir(&dir, "E:/");
+    // if (res != LV_FS_RES_OK) {
+    //     rt_kprintf("Open directory failed\n");
+    //     return;
+    // }
+
+    // /* Read all files in the directory one by one */
+    // while ((fname = lv_fs_readdir(&dir)) != NULL) {
+    //     rt_kprintf("File: %s\n", fname);
+    // }
+
+    // /* Close the directory */
+    // lv_fs_closedir(&dir);
+}
 
 
 
@@ -188,6 +255,8 @@ typedef struct lv_anim_timeline_info
  */
 static void Setup()
 {
+    lv_fs_dir_t rddir;
+    char fn[256];
     /* 将应用窗口移至前台，使其成为活动窗口 */
     lv_obj_move_foreground(appWindow);
     /* 设置应用的整体样式 */
@@ -196,6 +265,16 @@ static void Setup()
     Data_Week_Create(appWindow);
     Time_Create(appWindow);
     LOGO_Create(appWindow);
+    GIF_Create(appWindow);
+    // lv_fs_test();
+    // 调用目录读取函数
+    // lv_fs_res_t res = lv_fs_dir_read(&rddir, fn);
+
+    // if(res == LV_FS_RES_OK) {
+    //     printf("File name: %s\n", fn);
+    // } else {
+    //     printf("Error reading directory.\n");
+    // }
     // GIF_Create(appWindow);
     // ContWeek_Create(appWindow);
     /* 延迟100毫秒，以便界面元素有足够时间渲染 */

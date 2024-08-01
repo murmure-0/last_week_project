@@ -2,7 +2,7 @@
  * @Author: murnure 2662761173@qq.com
  * @Date: 2024-07-30 23:26:06
  * @LastEditors: murnure 2662761173@qq.com
- * @LastEditTime: 2024-07-31 16:05:00
+ * @LastEditTime: 2024-07-31 22:57:28
  * @FilePath: \code\applications\lvgl\lv_conf.h
  * @Description: 
  * 
@@ -38,7 +38,7 @@
 #define LV_COLOR_SCREEN_TRANSP      1
 #endif /* PKG_USING_LV_MUSIC_DEMO */
 
-#define LV_USE_FS_STDIO 1
+#define LV_USE_FS_STDIO 0
 #if LV_USE_FS_STDIO
     #define LV_FS_STDIO_LETTER '/'      /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
     #define LV_FS_STDIO_PATH "/"        /*Set the working directory. File/directory paths will be appended to it.*/
@@ -65,6 +65,15 @@
 #if LV_USE_FONT_SUBPX
     /*Set the pixel order of the display. Physical order of RGB channels. Doesn't matter with "normal" fonts.*/
     #define LV_FONT_SUBPX_BGR 0  /*0: RGB; 1:BGR order*/
+#endif
+
+
+/*API for open, read, etc*/
+#define LV_USE_FS_POSIX 1
+#if LV_USE_FS_POSIX
+    #define LV_FS_POSIX_LETTER 'E'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
+    #define LV_FS_POSIX_PATH ""         /*Set the working directory. File/directory paths will be appended to it.*/
+    #define LV_FS_POSIX_CACHE_SIZE 0    /*>0 to cache this number of bytes in lv_fs_read()*/
 #endif
 
 /*Enable drawing placeholders when glyph dsc is not found*/
