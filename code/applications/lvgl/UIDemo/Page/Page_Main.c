@@ -142,8 +142,12 @@ static void Time_Create(lv_obj_t* par)
 static void LOGO_Create(lv_obj_t* par)
 {
     lv_obj_t* img = lv_img_create(par);
-    lv_img_set_src(img, "E:/sdcard/IMG/IMG_RTTHREAD.bin");
     lv_obj_align_to(img, par, LV_ALIGN_BOTTOM_LEFT, 10, -15);
+    lv_img_set_src(img, "E:/sdcard/IMG/IMG_RTTHREAD.bin");
+    // lv_obj_add_flag( img, LV_OBJ_FLAG_HIDDEN);
+    // lv_obj_clear_flag( img, LV_OBJ_FLAG_HIDDEN);
+    
+    // lv_img_set_src(img, "E:/sdcard/IMG/IMG_RTTHREAD.bin");
 }
 static const char * anim_imgs[17] = {
     "E:/sdcard/IMG/HUTAO/1.bin",
@@ -219,28 +223,6 @@ typedef struct lv_anim_timeline_info
 
 
 
-//测试读取函数
-void lv_fs_test(void)
-{
-    // lv_fs_dir_t dir;
-    // lv_fs_res_t res;
-    // const char *fname;
-
-    // /* Open the directory */
-    // res = lv_fs_opendir(&dir, "E:/");
-    // if (res != LV_FS_RES_OK) {
-    //     rt_kprintf("Open directory failed\n");
-    //     return;
-    // }
-
-    // /* Read all files in the directory one by one */
-    // while ((fname = lv_fs_readdir(&dir)) != NULL) {
-    //     rt_kprintf("File: %s\n", fname);
-    // }
-
-    // /* Close the directory */
-    // lv_fs_closedir(&dir);
-}
 
 
 
@@ -255,8 +237,6 @@ void lv_fs_test(void)
  */
 static void Setup()
 {
-    lv_fs_dir_t rddir;
-    char fn[256];
     /* 将应用窗口移至前台，使其成为活动窗口 */
     lv_obj_move_foreground(appWindow);
     /* 设置应用的整体样式 */
@@ -264,8 +244,11 @@ static void Setup()
 
     Data_Week_Create(appWindow);
     Time_Create(appWindow);
-    LOGO_Create(appWindow);
+    // PageDelay(100);
     GIF_Create(appWindow);
+    PageDelay(100);
+    LOGO_Create(appWindow);
+    
     // lv_fs_test();
     // 调用目录读取函数
     // lv_fs_res_t res = lv_fs_dir_read(&rddir, fn);
@@ -300,10 +283,10 @@ static void Event(lv_event_t* e)
 	if(code == LV_EVENT_KEY)
 	{
 		uint8_t key = *(uint8_t*)lv_event_get_user_data(e);
-		rt_kprintf("lv_indev_get_key %d \n", key);
+		// rt_kprintf("lv_indev_get_key %d \n", key);
 		if(key == PAGE_KEY_RIGHT)
 		{
-			PM_Push(Page, PAGE_MainMenu);
+			PM_Push(Page, PAGE_HitPlant);
 		}
 		
 		if(key == PAGE_KEY_LEFT)
@@ -317,7 +300,7 @@ static void Event(lv_event_t* e)
         lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
         if (dir == LV_DIR_RIGHT)
         {
-            PM_Push(Page, PAGE_MainMenu);
+            PM_Push(Page, PAGE_HitPlant);
         }
     }
 }

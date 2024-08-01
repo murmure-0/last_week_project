@@ -87,7 +87,7 @@ static void KeyScan_ThreadEntry(void)
         if (key != PAGE_KEY_NONE)
         {
             /* 延迟50毫秒，以滤除短暂的抖动 */
-            rt_thread_mdelay(50);
+            rt_thread_mdelay(20);
             /* 如果键值仍然被按下，并且与上一次按下键值不同 */
             if (key == Key_Read() && last_key != key)
             {
@@ -104,7 +104,7 @@ static void KeyScan_ThreadEntry(void)
                 last_key = key;
             }
             /* 如果键持续被按下超过1秒 */
-            else if(last_key == key && rt_tick_get() - last_tick > 1000)
+            else if(last_key == key && rt_tick_get() - last_tick > 100)
             {
                 /* 更新全局键值变量，并发送按键事件 */
                 globel_key_val = key;
@@ -151,6 +151,7 @@ void DisplayPage_Init()
     // PAGE_IMPORT(SDCard);          // SD卡管理页面
     PAGE_IMPORT(Dial);            // 拨号页面
     PAGE_IMPORT(Main);
+    PAGE_IMPORT(HitPlant);
     // PAGE_IMPORT(SysInfo);         // 系统信息页面
     // PAGE_IMPORT(Attitude);        // 姿态显示页面
     // PAGE_IMPORT(BackLight);       // 背光设置页面
@@ -165,7 +166,7 @@ void DisplayPage_Init()
     // page.Push(PAGE_LEDAndBtn);
     
     // 将拨号页面推入页面堆栈，设置为当前显示的页面
-    PM_Push(&page, PAGE_Dial);
+    PM_Push(&page, PAGE_Main);
     
     // 初始化按钮模块
     Btns_Init();

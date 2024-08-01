@@ -61,6 +61,7 @@ typedef enum
     PAGE_Attitude,
     PAGE_BackLight,
     PAGE_HWTest,
+    PAGE_HitPlant,
     PAGE_RGBLed,
     PAGE_Setting,
     PAGE_TimeSet,
