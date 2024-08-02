@@ -87,7 +87,7 @@ static void KeyScan_ThreadEntry(void)
         if (key != PAGE_KEY_NONE)
         {
             /* 延迟50毫秒，以滤除短暂的抖动 */
-            rt_thread_mdelay(20);
+            rt_thread_mdelay(50);
             /* 如果键值仍然被按下，并且与上一次按下键值不同 */
             if (key == Key_Read() && last_key != key)
             {
@@ -104,7 +104,7 @@ static void KeyScan_ThreadEntry(void)
                 last_key = key;
             }
             /* 如果键持续被按下超过1秒 */
-            else if(last_key == key && rt_tick_get() - last_tick > 100)
+            else if(last_key == key && rt_tick_get() - last_tick > 200)
             {
                 /* 更新全局键值变量，并发送按键事件 */
                 globel_key_val = key;

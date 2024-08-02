@@ -4,6 +4,7 @@
 PAGE_EXPORT(Main);
 
 LV_IMG_DECLARE(IMG_RTTHREAD);
+
 // LV_IMG_DECLARE(IMG_Power);
 // LV_IMG_DECLARE(IMG_CHNSecond);
 
@@ -141,9 +142,21 @@ static void Time_Create(lv_obj_t* par)
 }
 static void LOGO_Create(lv_obj_t* par)
 {
-    lv_obj_t* img = lv_img_create(par);
-    lv_obj_align_to(img, par, LV_ALIGN_BOTTOM_LEFT, 10, -15);
-    lv_img_set_src(img, "E:/sdcard/IMG/IMG_RTTHREAD.bin");
+    /* 创建一个容器对象 */
+    lv_obj_t* cont = lv_obj_create(par);
+
+    /* 设置容器的大小 */
+    lv_obj_set_size(cont, 140, 57);
+    /* 将容器对齐到父对象的底部中间位置 */
+    lv_obj_align_to(cont, par, LV_ALIGN_LEFT_MID, 10, 70);
+    /* 设置容器边框宽度 */
+    /* 设置容器边框宽度 */
+    lv_obj_set_style_border_width(cont, 0, LV_PART_MAIN);
+    //移除容器的边框
+    lv_obj_clear_flag(cont, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_t* img = lv_img_create(cont);
+    lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
+    lv_img_set_src(img, &IMG_RTTHREAD);
     // lv_obj_add_flag( img, LV_OBJ_FLAG_HIDDEN);
     // lv_obj_clear_flag( img, LV_OBJ_FLAG_HIDDEN);
     
@@ -246,9 +259,8 @@ static void Setup()
     Time_Create(appWindow);
     // PageDelay(100);
     GIF_Create(appWindow);
-    PageDelay(100);
+    PageDelay(300);
     LOGO_Create(appWindow);
-    
     // lv_fs_test();
     // 调用目录读取函数
     // lv_fs_res_t res = lv_fs_dir_read(&rddir, fn);
@@ -286,12 +298,12 @@ static void Event(lv_event_t* e)
 		// rt_kprintf("lv_indev_get_key %d \n", key);
 		if(key == PAGE_KEY_RIGHT)
 		{
-			PM_Push(Page, PAGE_HitPlant);
+			PM_Push(Page, PAGE_MainMenu);
 		}
 		
 		if(key == PAGE_KEY_LEFT)
 		{
-			PM_Push(Page, PAGE_HWTest);
+			PM_Push(Page, PAGE_MainMenu);
 		}
 		
 	}

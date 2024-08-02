@@ -2,7 +2,7 @@
  * @Author: murnure 2662761173@qq.com
  * @Date: 2024-07-30 23:26:06
  * @LastEditors: murnure 2662761173@qq.com
- * @LastEditTime: 2024-07-31 22:57:28
+ * @LastEditTime: 2024-08-02 14:27:37
  * @FilePath: \code\applications\lvgl\lv_conf.h
  * @Description: 
  * 
@@ -49,6 +49,7 @@
 #define LV_FONT_MONTSERRAT_20 1
 #define LV_FONT_MONTSERRAT_28 1
 #define LV_FONT_MONTSERRAT_32 1
+
 
 #define LV_USE_DEMO_BENCHMARK 1
 // #define LV_LVGL_H_INCLUDE_SIMPLE 1
