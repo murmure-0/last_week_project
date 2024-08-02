@@ -2,7 +2,7 @@
  * @Author: murnure 2662761173@qq.com
  * @Date: 2024-07-29 16:00:39
  * @LastEditors: murnure 2662761173@qq.com
- * @LastEditTime: 2024-08-01 16:17:01
+ * @LastEditTime: 2024-08-02 16:10:58
  * @FilePath: \code\applications\main.c
  * @Description: 
  * 
@@ -30,13 +30,26 @@
 // #define GPIO_LED_R    GET_PIN(F, 12)
 int main(void)
 {
-    // rt_pin_mode(GPIO_LED_R, PIN_MODE_OUTPUT);
 
+    
+
+    
+
+    
+
+    // 释放资源
+    // ap3216c_deinit(dev);
+
+    // return 0;
     // while (1)
     // {
-    //     rt_pin_write(GPIO_LED_R, PIN_HIGH);
-    //     rt_thread_mdelay(500);
-    //     rt_pin_write(GPIO_LED_R, PIN_LOW);
-    //     rt_thread_mdelay(500);
+    //     // 读取光照数据
+    //     ambient_light = ap3216c_read_ambient_light(dev);
+    //     rt_kprintf("Ambient Light: %.2f lux\n", ambient_light);
+
+    //     // 读取接近度数据
+    //     proximity = ap3216c_read_ps_data(dev);
+    //     rt_kprintf("Proximity: %u\n", proximity);
+    //     rt_thread_mdelay(1000);
     // }
 }

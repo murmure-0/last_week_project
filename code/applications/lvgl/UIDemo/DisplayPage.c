@@ -156,7 +156,7 @@ void DisplayPage_Init()
     // PAGE_IMPORT(Attitude);        // 姿态显示页面
     // PAGE_IMPORT(BackLight);       // 背光设置页面
     // PAGE_IMPORT(HWTest);          // 硬件测试页面
-    // PAGE_IMPORT(RGBLed);          // RGBLED设置页面
+    PAGE_IMPORT(RGBLed);          // RGBLED设置页面
     // PAGE_IMPORT(Setting);         // 设置页面
     // PAGE_IMPORT(TimeSet);         // 时间设置页面
     // PAGE_IMPORT(EnvMonitor);      // 环境监测页面
@@ -218,9 +218,9 @@ void Beeper_thread_entry()
     while (RT_TRUE)
     {
         rt_sem_take(&beep_sem_lock, RT_WAITING_FOREVER);
-        rt_pin_write(BUZZER_PIN, PIN_HIGH);
+        // rt_pin_write(BUZZER_PIN, PIN_HIGH);
         rt_thread_mdelay(100);
-        rt_pin_write(BUZZER_PIN, PIN_LOW);
+        // rt_pin_write(BUZZER_PIN, PIN_LOW);
     }
     
 }

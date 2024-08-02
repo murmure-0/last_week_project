@@ -228,7 +228,7 @@
 #define PKG_USING_LVGL
 #define PKG_LVGL_THREAD_PRIO 10
 #define PKG_LVGL_THREAD_STACK_SIZE 8192
-#define PKG_LVGL_DISP_REFR_PERIOD 10
+#define PKG_LVGL_DISP_REFR_PERIOD 15
 #define PKG_LVGL_USING_DEMOS
 #define PKG_LVGL_USING_V080311
 #define PKG_LVGL_VER_NUM 0x080311
@@ -282,6 +282,12 @@
 
 /* sensors drivers */
 
+#define PKG_USING_AHT10
+#define PKG_USING_AHT10_LATEST_VERSION
+#define PKG_USING_AP3216C
+#define PKG_USING_AP3216C_LATEST_VERSION
+#define PKG_USING_ICM20608
+#define PKG_USING_ICM20608_LATEST_VERSION
 /* end of sensors drivers */
 
 /* touch drivers */
@@ -368,10 +374,14 @@
 #define BSP_USING_SRAM
 #define BSP_USING_ONBOARD_LCD
 #define BSP_USING_ONBOARD_LCD_PWM_BL
+#define BSP_USING_ONBOARD_LED_MATRIX
 #define BSP_USING_LVGL
 #define BSP_USING_FS
 #define BSP_USING_SDCARD_FATFS
 #define BSP_USING_FS_AUTO_MOUNT
+#define BSP_USING_AHT21
+#define BSP_USING_AP3216C
+#define BSP_USING_ICM20608
 /* end of Onboard Peripheral Drivers */
 
 /* On-chip Peripheral Drivers */
@@ -380,8 +390,17 @@
 #define BSP_USING_UART
 #define BSP_USING_UART1
 #define BSP_USING_PWM
+#define BSP_USING_PWM3
+#define BSP_USING_PWM3_CH2
 #define BSP_USING_PWM14
 #define BSP_USING_PWM14_CH1
+#define BSP_USING_I2C
+#define BSP_USING_I2C2
+#define BSP_I2C2_SCL_PIN 81
+#define BSP_I2C2_SDA_PIN 80
+#define BSP_USING_I2C3
+#define BSP_I2C3_SCL_PIN 64
+#define BSP_I2C3_SDA_PIN 65
 #define BSP_USING_SDIO
 #define BSP_USING_EXT_FMC_IO
 #define BSP_USING_FMC
