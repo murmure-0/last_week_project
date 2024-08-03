@@ -55,6 +55,7 @@ static void List_Creat(lv_obj_t* par)
 
 static void Setup(void)
 {
+    // PM_Push(Page, PAGE_TimeSet);
     /*将此页面移到前台*/
     lv_obj_move_foreground(appWindow);
 	Cont = Cont_Create(appWindow);

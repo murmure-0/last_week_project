@@ -14,7 +14,7 @@
 #include <rtconfig.h>
 
 #define LV_COLOR_DEPTH          16
-#define LV_USE_PERF_MONITOR     1
+#define LV_USE_PERF_MONITOR     0
 #define MY_DISP_HOR_RES          240
 #define MY_DISP_VER_RES          240
 //#define LV_USE_LOG              1

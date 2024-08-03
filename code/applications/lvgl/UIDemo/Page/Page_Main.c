@@ -1,6 +1,7 @@
 #include "../DisplayPrivate.h"
 // #include "lfs.h"
 // #include "aht10.h"
+#include <drivers/rtc.h>
 PAGE_EXPORT(Main);
 
 LV_IMG_DECLARE(IMG_RTTHREAD);
@@ -16,12 +17,16 @@ static lv_obj_t* contBatt;
 static lv_obj_t* contDate;
 static lv_obj_t* labelDate;
 static lv_obj_t* labelWeek;
+static lv_obj_t* labelTime;
 
+static Clock_Value_t Clock;
 
+static void time_update(void *parameter);
+static rt_thread_t time_updata_handle = RT_NULL;
 
 // static aht10_device_t aht10_dev;
-
-
+void data_thread_init(void);
+void RTC_Init(void);
 static lv_style_t* cont_style;/* 定义一个静态局部变量，用于存储容器样式指针 */
 
 /**
@@ -104,6 +109,9 @@ static void Data_Week_Create(lv_obj_t* par)
     lv_obj_align(label2, LV_ALIGN_RIGHT_MID, -10, 0);
     /* 清除标签的可滚动标志 */
     lv_obj_clear_flag(label2, LV_OBJ_FLAG_SCROLLABLE);
+    // lv_obj_set_style_text_color(label2, lv_color_make(0x00, 0x00, 0x00), LV_PART_MAIN);
+    // //设置背景颜色为白色
+    // lv_obj_set_style_bg_color(label2, lv_color_make(0xFF, 0xFF, 0xFF), LV_PART_MAIN);
 
     /* 保存标签对象的引用 */
     labelDate = label;
@@ -116,9 +124,9 @@ static void Time_Create(lv_obj_t* par)
     /* 为容器应用样式 */
     lv_obj_add_style(cont, cont_style, LV_PART_MAIN);
     /* 设置容器的大小 */
-    lv_obj_set_size(cont, 140, 80);
+    lv_obj_set_size(cont, 204, 80);
     /* 将容器对齐到父对象的底部中间位置 */
-    lv_obj_align_to(cont, contBatt, LV_ALIGN_LEFT_MID, 15, -20);
+    lv_obj_align_to(cont, contBatt, LV_ALIGN_CENTER, 10, -20);
     /* 设置容器边框宽度 */
     lv_obj_set_style_border_width(cont, 3, LV_PART_MAIN);
     /* 清除容器的可滚动标志 */
@@ -133,12 +141,13 @@ static void Time_Create(lv_obj_t* par)
     /* 设置标签的字体样式 */
     lv_obj_set_style_text_font(label, &Font_RexBold_68, LV_PART_MAIN);
     /* 设置标签的初始文本为"00.00.00" */
-    lv_label_set_text(label, "1400");
+    lv_label_set_text(label, "140000");
     lv_obj_set_style_text_color(label, lv_color_make(0xFF, 0xEC, 0xF1), LV_PART_MAIN);
     /* 将标签对齐到容器的左侧中间位置 */
-    lv_obj_align(label, LV_ALIGN_LEFT_MID, 10, 0);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
     /* 清除标签的可滚动标志 */
     lv_obj_clear_flag(label, LV_OBJ_FLAG_SCROLLABLE);
+    labelTime = label;
 }
 static void LOGO_Create(lv_obj_t* par)
 {
@@ -190,7 +199,7 @@ static void GIF_Create(lv_obj_t* par)
     /* 设置容器的大小 */
     lv_obj_set_size(cont, 80, 80);
     /* 将容器对齐到父对象的底部中间位置 */
-    lv_obj_align_to(cont, par, LV_ALIGN_RIGHT_MID, 0, 15);
+    lv_obj_align_to(cont, par, LV_ALIGN_BOTTOM_RIGHT, -15, -15);
     /* 设置容器边框宽度 */
     /* 设置容器边框宽度 */
     lv_obj_set_style_border_width(cont, 0, LV_PART_MAIN);
@@ -231,11 +240,77 @@ typedef struct lv_anim_timeline_info
 
 }lv_anim_timeline_info_t;
 
+void data_thread_init(void)
+{
+    //创建一个rtthread线程用来更新时间
+    time_updata_handle = rt_thread_create("time_update",
+        time_update,
+        RT_NULL,
+        1024,
+        10,
+        10);
+    if (time_updata_handle != RT_NULL)
+    {
+        rt_thread_startup(time_updata_handle);
+    }
+}
+
+static void time_update(void *parameter)
+{
+    struct tm *Time;
+	time_t now;
+    const char* week_str[] = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
+    
+    while(1)
+    {
+        now = time(RT_NULL) + 28800;
+        Time = gmtime(&now);
+        Clock.year = Time->tm_year+1900;
+        Clock.month = Time->tm_mon+1;
+        Clock.date = Time->tm_mday;
+        Clock.week = Time->tm_wday;
+        Clock.hour = Time->tm_hour;
+        Clock.min = Time->tm_min;
+        Clock.sec = Time->tm_sec;
+        //更新标签的时间
+        lv_label_set_text_fmt(labelTime, "%02d%02d%02d",Clock.hour,Clock.min,Clock.sec);
+        lv_label_set_text_fmt(labelDate, "%02d.%02d.%02d", Clock.year % 100, Clock.month, Clock.date);
+        // lv_label_set_text(labelWeek, week_str[Clock.week]);
+        // rt_kprintf("%d-%d-%d %d:%d:%d\n",Clock.year,Clock.month,Clock.date,Clock.hour,Clock.min,Clock.sec);
+        rt_thread_mdelay(200);
+    } 
+}
 
 
+void RTC_Init(void)
+{
+    rt_err_t ret = RT_EOK;
+    rt_device_t device = RT_NULL;
+    /* 寻 找 设 备 */
+    device = rt_device_find("rtc");
+    if (!device)
+    {
+        rt_kprintf("find %s failed!", "rtc");
+    }
+    /* 初 始 化 RTC 设 备 */
+    if(rt_device_open(device, 0) != RT_EOK)
+    {
+        rt_kprintf("open %s failed!", "rtc");
+    }
+    /* 设 置 日 期 */
+    // ret = set_date(2018, 12, 3);
+    // if (ret != RT_EOK)
+    // {
+    //     rt_kprintf("set RTC date failed\n");
+    // }
+    // /* 设 置 时 间 */
+    // ret = set_time(11, 15, 50);
+    // if (ret != RT_EOK)
+    // {
+    //     rt_kprintf("set RTC time failed\n");
+    // }
 
-
-
+}
 
 
 
@@ -261,6 +336,9 @@ static void Setup()
     GIF_Create(appWindow);
     PageDelay(300);
     LOGO_Create(appWindow);
+    //硬件初始化函数
+    RTC_Init();
+    data_thread_init();
     // lv_fs_test();
     // 调用目录读取函数
     // lv_fs_res_t res = lv_fs_dir_read(&rddir, fn);
@@ -285,6 +363,7 @@ static void Exit()
 	// aht10_deinit(aht10_dev);
     // PagePlayAnim(true);
     // lv_anim_timeline_del(anim_timeline);
+    rt_thread_delete(time_updata_handle);
     lv_obj_clean(appWindow);
 }
 

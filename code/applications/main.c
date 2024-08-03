@@ -2,7 +2,7 @@
  * @Author: murnure 2662761173@qq.com
  * @Date: 2024-07-29 16:00:39
  * @LastEditors: murnure 2662761173@qq.com
- * @LastEditTime: 2024-08-02 16:10:58
+ * @LastEditTime: 2024-08-02 20:41:11
  * @FilePath: \code\applications\main.c
  * @Description: 
  * 
@@ -30,13 +30,6 @@
 // #define GPIO_LED_R    GET_PIN(F, 12)
 int main(void)
 {
-
-    
-
-    
-
-    
-
     // 释放资源
     // ap3216c_deinit(dev);
 

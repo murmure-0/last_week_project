@@ -157,8 +157,8 @@ void DisplayPage_Init()
     // PAGE_IMPORT(BackLight);       // 背光设置页面
     // PAGE_IMPORT(HWTest);          // 硬件测试页面
     PAGE_IMPORT(RGBLed);          // RGBLED设置页面
-    // PAGE_IMPORT(Setting);         // 设置页面
-    // PAGE_IMPORT(TimeSet);         // 时间设置页面
+    PAGE_IMPORT(Setting);         // 设置页面
+    PAGE_IMPORT(TimeSet);         // 时间设置页面
     // PAGE_IMPORT(EnvMonitor);      // 环境监测页面
     // PAGE_IMPORT(WiFi);            // WiFi设置页面
     

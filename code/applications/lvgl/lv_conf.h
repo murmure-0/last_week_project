@@ -2,6 +2,16 @@
  * @Author: murnure 2662761173@qq.com
  * @Date: 2024-07-30 23:26:06
  * @LastEditors: murnure 2662761173@qq.com
+ * @LastEditTime: 2024-08-02 21:17:35
+ * @FilePath: \code\applications\lvgl\lv_conf.h
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by murmure, All Rights Reserved. 
+ */
+/*
+ * @Author: murnure 2662761173@qq.com
+ * @Date: 2024-07-30 23:26:06
+ * @LastEditors: murnure 2662761173@qq.com
  * @LastEditTime: 2024-08-02 14:27:37
  * @FilePath: \code\applications\lvgl\lv_conf.h
  * @Description: 
@@ -24,7 +34,7 @@
 #include <rtconfig.h>
 
 #define LV_COLOR_DEPTH          16
-#define LV_USE_PERF_MONITOR     1
+#define LV_USE_PERF_MONITOR     0
 #define MY_DISP_HOR_RES          240
 #define MY_DISP_VER_RES          240
 //#define LV_USE_LOG              1
