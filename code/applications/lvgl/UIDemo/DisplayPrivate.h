@@ -63,6 +63,7 @@ typedef enum
     PAGE_HWTest,
     PAGE_HitPlant,
     PAGE_RGBLed,
+    PAGE_alarm,
     PAGE_Setting,
     PAGE_TimeSet,
     PAGE_EnvMonitor,

@@ -35,6 +35,7 @@ static AppICON_TypeDef AppICON_Grp[] =
 {
     APP_DEF("E:/sdcard/IMG/HIT_PLANT/icon_plant.bin", HitPlant, 0x000000),
     APP_DEF("E:/sdcard/IMG/HIT_PLANT/icon_RGB.bin", RGBLed, 0x000000),
+    APP_DEF("E:/sdcard/IMG/alarm.bin", alarm, 0x000000),
     APP_DEF("E:/sdcard/IMG/Setting.bin", Setting, 0x000000),
     // APP_DEF(RGBLed, 0x0400A5),
 	// APP_DEF(EnvMonitor, 0xFF7FC6),

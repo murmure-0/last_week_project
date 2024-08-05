@@ -38,7 +38,7 @@ uint8_t globel_key_val;
 
 #define BUZZER_PIN      GET_PIN(B, 0)
 static rt_thread_t tid = RT_NULL;
-static struct rt_semaphore beep_sem_lock = {0};
+// static struct rt_semaphore beep_sem_lock = {0};
 rt_err_t Beeper_Thread_init(void);
 
 /*	PAGE_KEY_NONE,
@@ -99,7 +99,7 @@ static void KeyScan_ThreadEntry(void)
                 globel_key_val = key;
                 lv_event_send(AppWindow_GetObj(page.NowPage), LV_EVENT_KEY, &globel_key_val);
                 /* 发送蜂鸣器信号，以提示按键事件 */
-                rt_sem_release(&beep_sem_lock);
+                // rt_sem_release(&beep_sem_lock);
                 /* 更新上一次按键的键值 */
                 last_key = key;
             }
@@ -152,6 +152,7 @@ void DisplayPage_Init()
     PAGE_IMPORT(Dial);            // 拨号页面
     PAGE_IMPORT(Main);
     PAGE_IMPORT(HitPlant);
+    PAGE_IMPORT(alarm);
     // PAGE_IMPORT(SysInfo);         // 系统信息页面
     // PAGE_IMPORT(Attitude);        // 姿态显示页面
     // PAGE_IMPORT(BackLight);       // 背光设置页面
@@ -172,7 +173,7 @@ void DisplayPage_Init()
     Btns_Init();
     
     // 初始化蜂鸣器线程
-    Beeper_Thread_init();
+    // Beeper_Thread_init();
     
     // 为当前屏幕添加事件回调函数，处理页面手势事件
     lv_obj_add_event_cb(lv_scr_act(), (lv_event_cb_t)page_gestute_event_cb, LV_EVENT_ALL, NULL);
@@ -213,36 +214,36 @@ void PageDelay(uint32_t ms)
     }
 }
 
-void Beeper_thread_entry()
-{
-    while (RT_TRUE)
-    {
-        rt_sem_take(&beep_sem_lock, RT_WAITING_FOREVER);
-        // rt_pin_write(BUZZER_PIN, PIN_HIGH);
-        rt_thread_mdelay(100);
-        // rt_pin_write(BUZZER_PIN, PIN_LOW);
-    }
+// void Beeper_thread_entry()
+// {
+//     while (RT_TRUE)
+//     {
+//         // rt_sem_take(&beep_sem_lock, RT_WAITING_FOREVER);
+//         // rt_pin_write(BUZZER_PIN, PIN_HIGH);
+//         rt_thread_mdelay(100);
+//         // rt_pin_write(BUZZER_PIN, PIN_LOW);
+//     }
     
-}
+// }
 
-rt_err_t Beeper_Thread_init()
-{
-    rt_pin_mode(BUZZER_PIN, PIN_MODE_OUTPUT);
+// rt_err_t Beeper_Thread_init()
+// {
+//     rt_pin_mode(BUZZER_PIN, PIN_MODE_OUTPUT);
 
-    rt_sem_init(&beep_sem_lock, "beep_sem", 0 , RT_IPC_FLAG_PRIO);
+//     // rt_sem_init(&beep_sem_lock, "beep_sem", 0 , RT_IPC_FLAG_PRIO);
 
-    tid = rt_thread_create("Beeper",
-                                    Beeper_thread_entry, RT_NULL,
-                                    256,
-                                    25,
-                                    10);
-    if (tid != RT_NULL)
-    {
-        rt_thread_startup(tid);
-    }
-    else
-    {
-        rt_kprintf("create thread Beeper failed");
-        return -1;
-    }
-}
+//     tid = rt_thread_create("Beeper",
+//                                     Beeper_thread_entry, RT_NULL,
+//                                     256,
+//                                     25,
+//                                     10);
+//     if (tid != RT_NULL)
+//     {
+//         rt_thread_startup(tid);
+//     }
+//     else
+//     {
+//         rt_kprintf("create thread Beeper failed");
+//         return -1;
+//     }
+// }
